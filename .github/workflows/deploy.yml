@@ -43,9 +43,15 @@ jobs:
       - name: Authenticate to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway login --apiKey "$RAILWAY_TOKEN"
+        run: |
+          source "$HOME/.railway/env"
+          railway login --browserless
       - name: Link Railway project
-        run: railway link --project ${{ secrets.RAILWAY_PROJECT_ID }} --environment ${{ secrets.RAILWAY_ENVIRONMENT_ID }}
+        run: |
+          source "$HOME/.railway/env"
+          railway link --project ${{ secrets.RAILWAY_PROJECT_ID }} --environment ${{ secrets.RAILWAY_ENVIRONMENT_ID }} --service ${{ secrets.RAILWAY_SERVICE_ID }}
       - name: Deploy backend
         working-directory: backend
-        run: railway up --detach --service ${{ secrets.RAILWAY_SERVICE_ID }}
+        run: |
+          source "$HOME/.railway/env"
+          railway up --detach --json --project ${{ secrets.RAILWAY_PROJECT_ID }} --environment ${{ secrets.RAILWAY_ENVIRONMENT_ID }} --service ${{ secrets.RAILWAY_SERVICE_ID }}
