@@ -78,85 +78,18 @@ cd backend
 ../../venv_py312/bin/python -m pytest
 ```
 
-## GitHub Actions
-A CI workflow is included in `.github/workflows/ci.yml`.
-On every push or pull request to `main`, it will:
-- install and test the backend dependencies
-- install and build the frontend with Vite
-
-This helps catch regressions before Railway or Vercel deploy.
-
-## Deployment
-### GitHub Actions direct deploy
-A dedicated deploy workflow is available at `.github/workflows/deploy.yml`.
-It runs on push to `main` or via manual dispatch and performs:
-- frontend build and deploy to Vercel
-- backend deploy to Railway
-
-Set these repository secrets before using the workflow:
-- `VERCEL_TOKEN`
-- `VERCEL_ORG_ID`
-- `VERCEL_PROJECT_ID`
-- `RAILWAY_TOKEN`
-- `RAILWAY_PROJECT_ID`
-- `RAILWAY_SERVICE_ID`
-- `RAILWAY_ENVIRONMENT_ID`
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
-- `GOOGLE_REDIRECT_URI`
-- `SECRET_KEY`
-- `FRONTEND_URL`
-- `DATABASE_URL`
-
-### Railway backend
-Railway is configured to deploy the backend using `backend/Dockerfile`.
-To deploy manually or with GitHub Actions:
-1. Create a new Railway project.
-2. Connect the GitHub repo `thahasing/email-assistant`.
-3. Set the service root to `backend` and deploy from `main`.
-4. Provide these Railway environment variables:
-   - `GOOGLE_CLIENT_ID`
-   - `GOOGLE_CLIENT_SECRET`
-   - `GOOGLE_REDIRECT_URI=http://<your-railway-domain>/api/v1/auth/callback`
-   - `SECRET_KEY` (random string)
-   - `FRONTEND_URL=https://<your-vercel-domain>`
-   - `DATABASE_URL=sqlite:///./email_assistant.db` or PostgreSQL URL
-
-Railway will also auto-deploy on every push to `main` once the project is
-connected.
-
-### PostgreSQL on Railway (recommended)
-If you want a production-ready backend, use Railway Postgres instead of
-SQLite. Set `DATABASE_URL` to the connection string provided by Railway,
-for example:
-
-```env
-DATABASE_URL=postgresql://user:password@host:5432/database_name
-```
-
-The backend already supports SQLAlchemy-compatible database URLs, so no
-code changes are required.
-
-### Vercel frontend
-Vercel can deploy the `frontend` directory as a static app.
-To deploy manually or with GitHub Actions:
-1. Create a new Vercel project from GitHub `thahasing/email-assistant`.
-2. Set the root directory to `frontend`.
-3. Add Vercel environment variables if needed:
-   - `VITE_API_URL=https://<your-railway-domain>/api/v1`
-4. Vercel uses `npm install` and `npm run build` automatically.
-
-The frontend will be served from a Vercel domain and will connect to the
-Railway backend via `VITE_API_URL`.
+## Pushing to GitHub
+This project is ready for Git. See the repo remote already configured in
+this workspace. Don't commit secrets — keep `.env` out of the repository.
 
 ## Troubleshooting
 - If you see `redirect_uri_mismatch`, verify the redirect URI in Google
-  Cloud matches the deployed `GOOGLE_REDIRECT_URI`.
-- If port 8000 is in use locally, stop the process or run the backend on a
-  different port.
-- If the frontend cannot reach the backend, verify `VITE_API_URL` is set to
-  the Railway backend URL and `FRONTEND_URL` matches your Vercel app URL.
+	Cloud matches `GOOGLE_REDIRECT_URI` in `backend/.env`.
+- If port 8000 is in use, either stop the occupying process or run the
+	backend on a different port (edit `run.py`).
 
 ## Docs
 See `docs/gmail_setup.md` for a step-by-step guide to creating OAuth
 credentials in Google Cloud.
+
+If you want, I can add CI, a LICENSE file, or improve the README badges.
