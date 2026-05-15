@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.env
+.env.*
+*.sqlite3
+*.db
+venv/
+venv_py312/
+.env.local
+
+# Backend tokens
+backend/tokens/
+
+# Node
+node_modules/
+dist/
+.build/
+.vite/
+
+# Logs
+*.log
+
+# IDEs and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Misc
+*.pyc
+
