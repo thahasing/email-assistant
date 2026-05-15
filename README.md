@@ -87,9 +87,30 @@ On every push or pull request to `main`, it will:
 This helps catch regressions before Railway or Vercel deploy.
 
 ## Deployment
+### GitHub Actions direct deploy
+A dedicated deploy workflow is available at `.github/workflows/deploy.yml`.
+It runs on push to `main` or via manual dispatch and performs:
+- frontend build and deploy to Vercel
+- backend deploy to Railway
+
+Set these repository secrets before using the workflow:
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+- `RAILWAY_TOKEN`
+- `RAILWAY_PROJECT_ID`
+- `RAILWAY_SERVICE_ID`
+- `RAILWAY_ENVIRONMENT_ID`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `GOOGLE_REDIRECT_URI`
+- `SECRET_KEY`
+- `FRONTEND_URL`
+- `DATABASE_URL`
+
 ### Railway backend
 Railway is configured to deploy the backend using `backend/Dockerfile`.
-To deploy:
+To deploy manually or with GitHub Actions:
 1. Create a new Railway project.
 2. Connect the GitHub repo `thahasing/email-assistant`.
 3. Set the service root to `backend` and deploy from `main`.
@@ -118,7 +139,7 @@ code changes are required.
 
 ### Vercel frontend
 Vercel can deploy the `frontend` directory as a static app.
-To deploy:
+To deploy manually or with GitHub Actions:
 1. Create a new Vercel project from GitHub `thahasing/email-assistant`.
 2. Set the root directory to `frontend`.
 3. Add Vercel environment variables if needed:
