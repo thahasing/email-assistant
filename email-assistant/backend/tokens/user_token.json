@@ -1,0 +1,14 @@
+{
+  "token": "ya29.a0Aa7MYiq5h3uiQRjaw8pBrDgS9PG5Vc03UZV9gCswbwq3hSvOGY6g3Xr9HscPklXQ8ma6Zq-1xy-VBoW8SVK9muzY4jO9KnRotFK5A8gXiamV7jPVScE8SgyHdeFLM_2zTT2TeSAEqzy1HpkfiyNKYNU_t9jmxoAmub8IzQltppCiSoD0UC6hFpte7UWCm-Gx8D_HJ3gaCgYKAcoSARcSFQHGX2MiQ8LQlUDy_Pb8BXqJWmfbfQ0206",
+  "refresh_token": "1//0gsJb7ycb2SXQCgYIARAAGBASNwF-L9Ir-pJ39v_C8GYrgI0p_hGvz2aI1n3bBvp_T7buWHNIs32ocwJOdJ1muil9H3jewf-e3Bo",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "client_id": "1082436099308-d6gsaoicdas5hnnddnf6noti6u3rv9rv.apps.googleusercontent.com",
+  "client_secret": "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",
+  "scopes": [
+    "https://www.googleapis.com/auth/gmail.readonly",
+    "https://www.googleapis.com/auth/gmail.modify",
+    "openid",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile"
+  ]
+}
